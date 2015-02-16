@@ -1,6 +1,25 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var operatorSchema = new Schema({
+		name: String,
+    street: String,
+    zipcodeCity: String,
+    email: String,
+    telephone: String,
+    fax: String,
+    website: String
+});
+
+var appropriateAuthoritySchema = new Schema({
+    name: String,
+    address: String,
+    addressAdditional: String,
+    street: String,
+    zipcodeCity: String,
+    telephone: String
+});
+
 var lakeSchema = new Schema({
     id: Number,
     name: String,
@@ -20,24 +39,11 @@ var lakeSchema = new Schema({
     extracurricularActivity: String,
     yearratings: Array,
     images: Array,
-    extracurricularActivity: Array,
-    operator: {
-        name: String,
-        street: String,
-        zipcodeCity: String,
-        email: String,
-        telephone: String,
-        fax: String,
-        website: String
-    },
-    appropriateAuthority: {
-        name: String,
-        address: String,
-        addressAdditional: String,
-        street: String,
-        zipcodeCity: String,
-        telephone: String
-    }
+    operator: [operatorSchema],
+    appropriateAuthority: [appropriateAuthoritySchema]
 });
 
+var Lake = mongoose.model('Lake', lakeSchema);
+
 module.exports.lakeSchema = lakeSchema;
+module.exports.Lake = Lake;
