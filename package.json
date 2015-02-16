@@ -1,0 +1,39 @@
+{
+  "name": "badeseenservice",
+  "version": "1.0.0",
+  "description": "API for our `badeseen` app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeForGiessen/badeseenservice.git"
+  },
+  "author": "Christian Schulze",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeForGiessen/badeseenservice/issues"
+  },
+  "homepage": "https://github.com/CodeForGiessen/badeseenservice",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "commander": "^2.6.0",
+    "csv-parse": "0.0.6",
+    "express": "^4.11.2",
+    "mongodb": "^1.4.31",
+    "mongoose": "^3.8.23"
+  },
+  "devDependencies": {
+    "chai": "^2.0.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsbeautifier": "^0.2.8",
+    "mocha": "^2.1.0",
+    "mocha-jshint": "0.0.9",
+    "mocha-mongo": "^0.1.1",
+    "mocha-steps": "0.0.1",
+    "supertest": "^0.15.0"
+  }
+}
