@@ -1,6 +1,6 @@
 var express = require('express'),
     path = require('path'),
-		mongoose = require('mongoose');
+    mongoose = require('mongoose');
 
 var app = exports.app = express();
 

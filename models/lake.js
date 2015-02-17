@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var operatorSchema = new Schema({
-		name: String,
+    name: String,
     street: String,
     zipcodeCity: String,
     email: String,
