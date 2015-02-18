@@ -11,7 +11,7 @@ app.use(api);
 /* Mongoose */
 /* Establish database connection: either use the specified `DB_URI=ADRESS_TO_MONGODB`
 via the environment, or fall back to the default path */
-var database = process.env.DB_URI || "localhost:27017";
+var database = process.env.DB_URI || 'localhost:27017/badeseen';
 mongoose.connect(database);
 
 /* Mongoose events */

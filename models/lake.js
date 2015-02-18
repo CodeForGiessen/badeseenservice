@@ -1,3 +1,6 @@
+/**
+ * This file holds the mongodb schema and the mongoose model for lakes.
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
