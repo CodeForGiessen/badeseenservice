@@ -11,3 +11,7 @@ committing anything you should run `grunt beautify`.
 
 ### Testing
 Run `make test` for unit tests.
+
+### Generate API documentation
+Install `apiDoc` first (`npm install -g apidoc`). Then run `apidoc -i  api/`. The
+documentation can then be found under `doc/`

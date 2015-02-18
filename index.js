@@ -1,4 +1,5 @@
-var express = require('express'),
+var fs = require('fs'),
+    express = require('express'),
     path = require('path'),
     mongoose = require('mongoose');
 
@@ -7,6 +8,9 @@ var app = exports.app = express();
 /* set up API middleware */
 var api = require('./api');
 app.use(api);
+
+/* serve documentation as static content */
+app.use('/doc', express.static(__dirname + '/doc'));
 
 /* Mongoose */
 /* Establish database connection: either use the specified `DB_URI=ADRESS_TO_MONGODB`
