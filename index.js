@@ -18,13 +18,12 @@ via the environment, or fall back to the default path */
 var database = process.env.MONGODB_URI || 'localhost:27017/badeseen';
 mongoose.connect(database);
 
-/* Mongoose events */
 mongoose.connection.on('connected', function() {
-    console.log('Mongoose connected to ' + database);
+    console.log('Mongoose connected to database');
 });
 
 mongoose.connection.on('error', function(err) {
-    console.log('Mongoose experienced error: ' + err);
+    console.log(err);
 });
 
 mongoose.connection.on('disconnected', function() {
