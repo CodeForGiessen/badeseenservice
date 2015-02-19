@@ -1,8 +1,10 @@
 var fs = require('fs'),
     express = require('express'),
     path = require('path'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    config = require('config');
 
+var dbConfig = config.get('Database.path') || 'localhost:27017/badeseen';
 var app = exports.app = express();
 
 /* set up API middleware */
@@ -15,12 +17,11 @@ app.use('/doc', express.static(__dirname + '/doc'));
 /* Mongoose */
 /* Establish database connection: either use the specified `DB_URI=ADRESS_TO_MONGODB`
 via the environment, or fall back to the default path */
-var database = process.env.DB_URI || 'localhost:27017/badeseen';
-mongoose.connect(database);
+mongoose.connect(dbConfig);
 
 /* Mongoose events */
 mongoose.connection.on('connected', function() {
-    console.log('Mongoose connected to ' + database);
+    console.log('Mongoose connected to ' + dbConfig);
 });
 
 mongoose.connection.on('error', function(err) {

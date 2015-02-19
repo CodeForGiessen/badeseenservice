@@ -2,10 +2,12 @@ var mongoose = require('mongoose'),
     Lake = require('../models/lake').Lake,
     should = require('chai').should,
     assert = require('chai').assert,
-    crud = require('../api/v1/lakes/crud');
+    crud = require('../api/v1/lakes/crud'),
+    config = require('config');
 
 before(function() {
-    mongoose.connect(process.env.DB_URI || 'localhost:27017/badeseen');
+    var dbConfig = config.get('Database.path') || 'localhost:27017/badeseen';
+    mongoose.connect(dbConfig);
 });
 
 describe('insert, change and delete a test lake', function() {
