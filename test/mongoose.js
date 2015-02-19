@@ -5,7 +5,15 @@ var mongoose = require('mongoose'),
     crud = require('../api/v1/lakes/crud');
 
 before(function() {
-    mongoose.connect(process.env.DB_URI || 'localhost:27017/badeseen');
+    mongoose.connect(process.env.MONGODB_URI || 'localhost:27017/badeseen');
+
+    /* Mongoose disconnection on app termination */
+    process.on('SIGINT', function() {
+        mongoose.connection.close(function() {
+                console.log('Mongoose is disconnecting due to app termination');
+                process.exit(0);
+            });
+        });
 });
 
 describe('insert, change and delete a test lake', function() {
@@ -58,4 +66,8 @@ describe('insert, change and delete a test lake', function() {
             done();
         });
     });
+});
+
+after(function() {
+    mongoose.connection.close();
 });
