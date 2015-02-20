@@ -32,7 +32,8 @@ function retrieveLake(query, callback) {
 }
 
 /**
- * Update lake data
+ * Update lake data matching the query with the new
+ * data and call callback
  *
  * @param  {Object}   query    Query to find lake
  * @param  {Object}   newData  New data
@@ -43,12 +44,11 @@ function updateLake(query, newData, callback) {
 }
 
 /**¬
- * Update lake with given quer and call callbacky
+ * Remove lake with given query and call callbacky
  *
- * @param  {Object}   query    [description]¬
- * @param  {Function} callback [description]¬
+ * @param  {Object}   query    Query to find lake
+ * @param  {Function} callback Function to call after execution
  */
-
 function deleteLake(query, callback) {
     Lake.findOneAndRemove(query, callback);
 }

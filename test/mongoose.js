@@ -29,9 +29,11 @@ describe('insert, change and delete a test lake', function() {
     });
 
     it('should update the lake data', function(done) {
+        var oldName = testLake.name;
         testLake.name = 'itworks';
+
         crud.updateLake({
-            'name': testLake.name
+            'name': oldName
         }, {
             'name': testLake.name
         }, function(err, doc) {
@@ -62,7 +64,8 @@ describe('insert, change and delete a test lake', function() {
             'local.name': testLake.name
         }, function(err, doc) {
             if (err) throw err;
-            // assert.notEqual(doc, null, 'returned document should not be null');
+
+            assert.equal(err, null);
             done();
         });
     });
