@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/",
-    "title": "API entry point",
+    "title": "APi entry point",
     "name": "GetRoot",
     "group": "API",
     "success": {
@@ -19,14 +19,43 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"_links\":{\n        \"self\":{\n            \"href\":\"/\"\n        },\n        \"lakes\":{\n            \"href\":\"/lakes\"\n         }\n    }\n}",
+          "content": "HTTP/1.1 OK\n{\n     \"_links\": {\n           \"self\": {\n             \"href\": \"/api\"\n         }\n     },\n     \"v1\": {\n         \"href\": \"/api/v1\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/index.js",
+    "groupTitle": "API"
+  },
+  {
+    "type": "get",
+    "url": "/",
+    "title": "API entry point of first api version",
+    "name": "GetRootFirstVersion",
+    "group": "APIv1",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "optional": false,
+            "field": "200",
+            "description": "<p>OK</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"_links\":{\n        \"self\":{\n            \"href\":\"/api/v1\"\n        },\n        \"lakes\":{\n            \"href\":\"/api/v1/lakes\"\n         }\n    }\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
     "filename": "api/v1/index.js",
-    "groupTitle": "API"
+    "groupTitle": "APIv1"
   },
   {
     "type": "get",
