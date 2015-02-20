@@ -1,59 +1,82 @@
-var Lake = require('../../../models/lake').Lake;
+(function() {
+    'use strict';
 
-/**
- * Check whether the given id is a valid mongodb id or not
- * @param id the id to check
+    /* global require */
+    var Lake = require('../../../models/lake').Lake;
 
- * @param {bool} is valid id or not
-*/
-function isObjectId(id) {
-    return Lake.ObjectId.isValid(id);
-}
+    /**
+     * Check whether the given id is a valid mongodb id or not
+     * @param id the id to check
 
-/**
- * Create a lake based on the `lakeScheme` and call callback
- *
- * @param {Object} lake to save
- * @param {Function} callback
- */
-function createLake(lake, callback) {
-    var newLake = new Lake(lake);
-    newLake.save(callback);
-}
+     * @param {bool} is valid id or not
+    */
+    function isObjectId(id) {
+        return Lake.ObjectId.isValid(id);
+    }
 
-/**
- * Get lake from database and call callback
- *
- * @param  {Object}   query    Query
- * @param  {Function} callback Function to call after execution
- */
-function retrieveLake(query, callback) {
-    Lake.findOne(query, callback);
-}
+    function getAllObjectIDs(callback) {
+        Lake.find({}, {
+            '_id': 1
+        }, function(err, doc) {
+            var ids = [];
 
-/**
- * Update lake data matching the query with the new
- * data and call callback
- *
- * @param  {Object}   query    Query to find lake
- * @param  {Object}   newData  New data
- * @param  {Function} callback Function to call after execution
- */
-function updateLake(query, newData, callback) {
-    Lake.findOneAndUpdate(query, newData, callback);
-}
+            if (!err) {
+                doc.forEach(function(elt, index) {
+                    ids.push(elt._id);
+                });
+            }
 
-/**¬
- * Remove lake with given query and call callbacky
- *
- * @param  {Object}   query    Query to find lake
- * @param  {Function} callback Function to call after execution
- */
-function deleteLake(query, callback) {
-    Lake.findOneAndRemove(query, callback);
-}
+            callback(err, ids);
+        });
+    }
 
-module.exports.createLake = createLake;
-module.exports.retrieveLake = retrieveLake;
-module.exports.updateLake = updateLake;
-module.exports.deleteLake = deleteLake;
+    /**
+     * Create a lake based on the `lakeScheme` and call callback
+     *
+     * @param {Object} lake to save
+     * @param {Function} callback
+     */
+    function createLake(lake, callback) {
+        var newLake = new Lake(lake);
+        newLake.save(callback);
+    }
+
+    /**
+     * Get lake from database and call callback
+     *
+     * @param  {Object}   query    Query
+     * @param  {Function} callback Function to call after execution
+     */
+    function retrieveLake(query, callback) {
+        Lake.findOne(query, callback);
+    }
+
+    /**
+     * Update lake data matching the query with the new
+     * data and call callback
+     *
+     * @param  {Object}   query    Query to find lake
+     * @param  {Object}   newData  New data
+     * @param  {Function} callback Function to call after execution
+     */
+    function updateLake(query, newData, callback) {
+        Lake.findOneAndUpdate(query, newData, callback);
+    }
+
+    /**¬
+     * Remove lake with given query and call callbacky
+     *
+     * @param  {Object}   query    Query to find lake
+     * @param  {Function} callback Function to call after execution
+     */
+    function deleteLake(query, callback) {
+        Lake.findOneAndRemove(query, callback);
+    }
+
+    module.exports.createLake = createLake;
+    module.exports.retrieveLake = retrieveLake;
+    module.exports.updateLake = updateLake;
+    module.exports.deleteLake = deleteLake;
+    module.exports.isObjectId = isObjectId;
+    module.exports.getAllObjectIDs = getAllObjectIDs;
+})();

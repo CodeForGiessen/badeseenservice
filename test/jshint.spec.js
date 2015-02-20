@@ -1,1 +1,6 @@
-require('mocha-jshint')();
+(function() {
+    'use strict';
+
+    /* global require */
+    require('mocha-jshint')();
+})();

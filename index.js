@@ -1,41 +1,46 @@
-var fs = require('fs'),
-    express = require('express'),
-    path = require('path'),
-    mongoose = require('mongoose');
+(function() {
+    'use strict';
 
-var app = exports.app = express();
+    /* global require */
+    var fs = require('fs'),
+        express = require('express'),
+        path = require('path'),
+        mongoose = require('mongoose');
 
-/* set up API middleware */
-var api = require('./api');
-app.use(api);
+    var app = exports.app = express();
 
-/* serve documentation as static content */
-app.use('/doc', express.static(__dirname + '/doc'));
+    /* set up API middleware */
+    var api = require('./api');
+    app.use(api);
 
-/* Mongoose */
-/* Establish database connection: either use the specified `DB_URI=ADRESS_TO_MONGODB`
-via the environment, or fall back to the default path */
-var database = process.env.MONGODB_URI || 'localhost:27017/badeseen';
-mongoose.connect(database);
+    /* serve documentation as static content */
+    app.use('/doc', express.static(__dirname + '/doc'));
 
-mongoose.connection.on('connected', function() {
-    console.log('Mongoose connected to database');
-});
+    /* Mongoose */
+    /* Establish database connection: either use the specified `DB_URI=ADRESS_TO_MONGODB`
+    via the environment, or fall back to the default path */
+    var database = process.env.MONGODB_URI || 'localhost:27017/badeseen';
+    mongoose.connect(database);
 
-mongoose.connection.on('error', function(err) {
-    console.log(err);
-});
-
-mongoose.connection.on('disconnected', function() {
-    console.log('Mongoose disconnected');
-});
-
-/* Mongoose disconnection on app termination */
-process.on('SIGINT', function() {
-    mongoose.connection.close(function() {
-        console.log('Mongoose is disconnecting due to app termination');
-        process.exit(0);
+    mongoose.connection.on('connected', function() {
+        console.log('Mongoose connected to database');
     });
-});
 
-app.listen(7650);
+    mongoose.connection.on('error', function(err) {
+        console.log(err);
+    });
+
+    mongoose.connection.on('disconnected', function() {
+        console.log('Mongoose disconnected');
+    });
+
+    /* Mongoose disconnection on app termination */
+    process.on('SIGINT', function() {
+        mongoose.connection.close(function() {
+            console.log('Mongoose is disconnecting due to app termination');
+            process.exit(0);
+        });
+    });
+
+    app.listen(7650);
+})();
