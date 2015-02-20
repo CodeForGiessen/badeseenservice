@@ -9,6 +9,25 @@
 
     var app = require('../').app;
 
+    describe('GET /api/v1', function() {
+        it('should return entry point with self reference and lake reference', function(done) {
+            request(app)
+                .get('/api/')
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    else {
+                        var doc = res.body;
+
+                        assert.notEqual(doc, null, 'returned document should not be null');
+                        assert.equal(doc._links.self.href, '/api/');
+                        assert.equal(doc._links.v1.href, '/api/v1');
+                        done();
+                    }
+                });
+        });
+    });
+
     describe('GET /api/v1/lakes', function() {
         it('should return entry point with self reference and lake reference', function(done) {
             request(app)
@@ -20,8 +39,8 @@
                         var doc = res.body;
 
                         assert.notEqual(doc, null, 'returned document should not be null');
-                        assert.equal(doc._links.self.href, '/');
-                        assert.equal(doc._links.lakes.href, '/lakes');
+                        assert.equal(doc._links.self.href, '/api/v1');
+                        assert.equal(doc._links.lakes.href, '/api/v1/lakes');
                         done();
                     }
                 });

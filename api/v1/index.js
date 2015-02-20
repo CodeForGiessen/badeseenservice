@@ -8,9 +8,9 @@
 
     app.use(lakes);
     /**
-     * @api {get} / API entry point
-     * @apiName GetRoot
-     * @apiGroup API
+     * @api {get} / API entry point of first api version
+     * @apiName GetRootFirstVersion
+     * @apiGroup APIv1
      *
      * @apiSuccess (200) 200 OK
      *
@@ -19,10 +19,10 @@
      *      {
      *          "_links":{
      *              "self":{
-     *                  "href":"/"
+     *                  "href":"/api/v1"
      *              },
      *              "lakes":{
-     *                  "href":"/lakes"
+     *                  "href":"/api/v1/lakes"
      *               }
      *          }
      *      }
@@ -32,10 +32,10 @@
         res.send({
             '_links': {
                 'self': {
-                    'href': '/'
+                    'href': '/api/v1'
                 },
                 'lakes': {
-                    'href': '/lakes'
+                    'href': '/api/v1/lakes'
                 }
             }
         });
