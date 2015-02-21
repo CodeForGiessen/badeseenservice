@@ -19,7 +19,7 @@
      */
 
     /**
-     * @api {get} /lakes/ Lakes entry point
+     * @api {get} /lakes/ API entry point for lakes ressources
      * @apiName GetLakes
      * @apiGroup Lakes
      *
@@ -156,7 +156,7 @@
      *
      * @apiUse LakeNotFoundError
      */
-    app.get('/api/v1/lakes/:id', function(req, res) {
+    app.get('/api/v1/lakes/:id', function(req, res, next) {
         crud.retrieveLake({
             '_id': req.params.id
         }, function(err, doc) {
@@ -172,9 +172,11 @@
                         "error": err
                     });
                 }
+
+                next(err);
             }
 
-            if (!doc) {
+            if (doc === null) {
                 res.statusCode = 404;
                 res.json({
                     "error": "LakeNotFound"
@@ -182,7 +184,52 @@
             } else {
                 res.statusCode = 200;
                 res.json(doc);
-            }   
+            }
+        });
+    });
+
+    /**
+     * @api {get}
+     * @apiName GetLakeMeasurements
+     * @apiGroup Lakes
+     *
+     * @apiParam {String} id unique lake id
+     *
+     * @apiSuccess (200) {Array} measurements of bacteria in the lake
+     *
+     * @apiUse LakeNotFoundError
+     */
+    app.get('/api/v1/lakes/:id/measurements', function(req, res, next) {
+        crud.retrieveLake({
+            '_id': req.params.id
+        }, function(err, doc) {
+            if (err) {
+                if (err.name === "CastError" && err.type === "ObjectId") {
+                    res.statusCode = 422;
+                    res.json({
+                        "error": "NoValidID"
+                    });
+                } else {
+                    res.statusCode = 500;
+                    res.json({
+                        "error": err
+                    });
+                }
+
+                next(err);
+            }
+
+            if (doc === null) {
+                res.statusCode = 404;
+                res.json({
+                    "error": "LakeNotFound"
+                });
+            } else {
+                res.statusCode = 200;
+                res.json({
+                    'measurements': doc.measurements
+                });
+            }
         });
     });
 })();
