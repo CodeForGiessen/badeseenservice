@@ -28,6 +28,9 @@
      * @apiSuccessExample {json} Success-Response:
      *      HTTP/1.1 200 OK
      *      {
+     *          "self": {
+     *              "href": "/api/v1/lakes"
+     *          },
      *          "_links":{
      *              "507f1f77bcf86cd799439011": {
      *                  "href": "/api/v1/lakes/507f1f77bcf86cd799439011"
@@ -49,6 +52,10 @@
                 };
                 out._links.push(obj);
             });
+
+            out.self = {
+                'href': '/api/v1/lakes'
+            };
 
             res.json(out);
         });
