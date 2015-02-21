@@ -19,7 +19,7 @@
      */
 
     /**
-     * @api {get} /lakes/ API entry point for lakes ressources
+     * @api {get} /lakes API entry point for lakes ressources
      * @apiName GetLakes
      * @apiGroup Lakes
      *
@@ -62,7 +62,7 @@
     });
 
     /**
-     * @api {get} /api/v1/lakes/:id Get Lake
+     * @api {get} /lakes/:id Get Lake
      * @apiName GetLake
      * @apiGroup Lakes
      *
@@ -93,7 +93,7 @@
      * @apiSuccessExample Success-Response:
      *    HTTP/1.1 200 OK
      *    {
-     *        *"__v": 0,
+     *        "__v": 0,
      *        "_id": "54e262e605e1723618de836e",
      *        "appropriateAuthority": [
      *        ],
@@ -196,13 +196,36 @@
     });
 
     /**
-     * @api {get}
+     * @api {get} /lake/:id/measurements Get lake measurements
      * @apiName GetLakeMeasurements
      * @apiGroup Lakes
      *
      * @apiParam {String} id unique lake id
      *
      * @apiSuccess (200) {Array} measurements of bacteria in the lake
+     *
+     * @apiSuccessExample Success-Response:
+     *    HTTP/1.1 200 OK
+     *    {
+     *        "measurements":
+     *        [
+     *            {
+     *                "comment": "",
+     *                "rating": 1,
+     *                "escherichiaColi": "15",
+     *                "enterocsocci": "15",
+     *                "waterTemperature": 20,
+     *                "date": "2014-08-18T22:00:00.000Z"
+     *               }, {
+     *                   "comment": "",
+     *                   "rating": 1,
+     *                   "escherichiaColi": "<15",
+     *                   "enterocsocci": "<15",
+     *                   "waterTemperature": 24,
+     *                   "date": "2014-08-04T22:00:00.000Z"
+     *            }
+     *        ]
+     *    }
      *
      * @apiUse LakeNotFoundError
      */
