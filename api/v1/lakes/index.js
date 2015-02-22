@@ -68,93 +68,133 @@
      *
      * @apiParam {String} id unique lake id
      *
-     * @apiSuccess (200) {String} lake id
-     * @apiSuccess (200) {String} name
+     * @apiSuccess (200) {String} _id lake identifier
+     * @apiSuccess (200) {String} name name of the lake
      * @apiSuccess (200) {Object} appropriateAuthority responsible authority for the lake
      * @apiSuccess (200) {Number} areaHa size of the lake
      * @apiSuccess (200) {String} city nearby city
      * @apiSuccess (200) {Number} depthAvg average depth
      * @apiSuccess (200) {Number} depthMax maximal depth
-     * @apiSuccess (200) {Array} extracurricularActivity activities
+     * @apiSuccess (200) {Array}  extracurricularActivity activities
      * @apiSuccess (200) {Number} heightAboveSeaLevel
      * @apiSuccess (200) {String} hlugurl url to hlug-website
-     * @apiSuccess (200) {Array} images of the lake
+     * @apiSuccess (200) {Array}  images of the lake
      * @apiSuccess (200) {String} introtext description
-     * @apiSuccess (200) {String} lakeType
-     * @apiSuccess (200) {Number} latitude
-     * @apiSuccess (200) {Number} longitude
-     * @apiSuccess (200) {Array} measurements of bacteria in the lake
+     * @apiSuccess (200) {String} lakeType type of lake
+     * @apiSuccess (200) {Number} latitude latitude of position
+     * @apiSuccess (200) {Number} longitude longitude of position
+     * @apiSuccess (200) {Array}  measurements of bacteria in the lake
      * @apiSuccess (200) {String} name name of the lake
      * @apiSuccess (200) {String} openFrom start date of the season NOT the opening hours
      * @apiSuccess (200) {String} openTo end date of the season NOT the opening hours
      * @apiSuccess (200) {Object} operator lake operator
-     * @apiSuccess (200) {Array} yearratings ratings of the lake
+     * @apiSuccess (200) {Array}  yearratings ratings of the lake
      * @apiSuccess (200) {Object} downloads pdfs and other downloads
-     * @apiSuccess (200) {Array} messages notifications
-     * @apiSuccess (200) {String} bathingPermission
+     * @apiSuccess (200) {Array}  messages notifications
+     * @apiSuccess (200) {String} bathingPermission permission of bathing at the moment
      *
      * @apiSuccessExample Success-Response:
      *    HTTP/1.1 200 OK
      *    {
-     *        "__v": 0,
-     *        "_id": "54e262e605e1723618de836e",
-     *        "appropriateAuthority": [
-     *        ],
-     *        "areaHa": 6.7,
-     *        "city": "Greifenstein",
-     *        "depthAvg": 4.04,
-     *        "depthMax": 11.4,
-     *        "extracurricularActivity": "Angelsport,Baden",
-     *        "heightAboveSeaLevel": 300,
-     *        "hlugurl": "http://badeseen.hlug.de/badegewaesser/lahn-dill-kreis/ulmbachtalsperre.html",
-     *        "images": [
-     *            {
-     *                 "copyright": "http://badeseen.hlug.de© HLUG",
-     *                 "src": "http://badeseen.hlug.de/fileadmin/img_content/badeseen/Lahn-Dill-Kreis/Ulmbachtalsperre/Ulmbachtalsperre02.JPG"
-     *            },
-     *            {
-     *                 "copyright": "http://badeseen.hlug.de© HLUG",
-     *                 "src": "http://badeseen.hlug.de/fileadmin/img_content/badeseen/Lahn-Dill-Kreis/Ulmbachtalsperre/Ulmbachtalsperre01_T.JPG"
-     *            }
-     *        ],
-     *        "introtext": "12 km südwestlich von Herborn liegt der fast 7 ha große Stausee. Umgeben von Wiesen dient er dem Hochwasserschutz. Im Badebereich ist das Ufer flach, sonst steil und bewachsen.",
+     *        "_id": "54e88e163aa8ccc41e1ab839",
+     *        "name": "Marbach-Stausee",
+     *        "hlugurl": "http://badeseen.hlug.de/badegewaesser/odenwaldkreis/marbach-stausee.html",
+     *        "latitude": 49.6089,
+     *        "longitude": 8.9677,
+     *        "openFrom": "2014-06-30T22:00:00.000Z",
+     *        "openTo": "2014-08-30T22:00:00.000Z",
+     *        "bathingPermission": "keine Badesaison",
+     *        "introtext": "Der Bereich hinter dem Staudamm (abzügl. einer Sicherheitszone) ist für Surfer und Segelboote reserviert. Daran angrenzend befindet sich der Bade- und Vergnügungsbereich. Im hinteren Teil des Sees befindet sich der Vogelschutzbereich mit einer kleinen Insel. Dieser Bereich darf nicht betreten und nicht mit Booten befahren werden. Um den See führt ein drei Kilometer langer Wanderweg. ",
+     *        "city": "Beerfelden",
+     *        "heightAboveSeaLevel": 250,
+     *        "areaHa": 22,
+     *        "depthMax": 8.6,
+     *        "depthAvg": 3.21,
      *        "lakeType": "Talsprerre",
-     *        "latitude": 50.6024,
-     *        "longitude": 8.2685,
-     *        "measurements": [
+     *        "downloads": {
+     *            "generalInformation":"http://badeseen.hlug.de/fileadmin/dokumente/badeseen/Odenwaldkreis/Marbach-Stausee/DEHE_PR_0046_Text_Marbachtalsperre_120401.pdf",
+     *            "landUseMap":"http://badeseen.hlug.de/fileadmin/dokumente/badeseen/Odenwaldkreis/Marbach-Stausee/DEHE_PR_0046_Karte_Marbach Stausee.pdf",
+     *            "bathymetricChart":null
+     *        },
+     *        "messages": [],
+     *        "appropriateAuthority":{
+     *            "telephone":"06062 70-0",
+     *            "zipcodeCity":"64711 Erbach",
+     *            "street":"Michelstädter Str. 12",
+     *            "addressAdditional":"Kreisgesundheitsamt",
+     *            "address":"Odenwaldkreis",
+     *            "name":"Gesundheitsamt Odenwaldkreis"
+     *        },
+     *        "operator": {
+     *            "website": "",
+     *            "fax": "06062/ 70 287",
+     *            "telephone": "06062/ 70 288",
+     *            "email": "m.sottong@wv-muemling-gersprenz.de",
+     *            "zipcodeCity": "64711 Erbach",
+     *            "street": "Michelstädter Straße 12",
+     *            "name": "Wasserverband Mümling Landratsamt Odenwaldkreis"
+     *        },
+     *        "images":[
      *            {
-     *                "comment": "",
-     *                "date": "2014-08-17T22:00:00.000Z",
-     *                "enterocsocci": "10",
-     *                "escherichiaColi": "21",
-     *                "rating": 1,
-     *                "waterTemperature": 17
+     *                "copyright":"http://badeseen.hlug.de© HLUG",
+     *                "src":"http://badeseen.hlug.de/fileadmin/img_content/badeseen/Odenwaldkreis/Marbach-Stausee/Marbachtalsperre03.JPG",
+     *                "_id":"54e9dc7ec6ad161e1ca26bc1"
      *            },
      *            {
-     *                "comment": "",
-     *                "date": "2014-07-20T22:00:00.000Z",
-     *                "enterocsocci": "10",
-     *                "escherichiaColi": "10",
-     *                "rating": 1,
-     *                "waterTemperature": 23
-     *            }
-     *        ],
-     *        "name": "Ulmbachtalsperre",
-     *        "openFrom": "2014-05-18T22:00:00.000Z",
-     *        "openTo": "2014-08-31T22:00:00.000Z",
-     *        "operator": [
-     *        ],
-     *        "yearratings": [
-     *            {
-     *                "rating": null,
-     *                "year": "2012"
-     *            },
-     *            {
-     *                "rating": 1,
-     *                "year": "2013"
-     *            }
-     *        ]
-     *    }
+     *               "copyright":"http://badeseen.hlug.de© HLUG",
+     *               "src":"http://badeseen.hlug.de/fileadmin/img_content/badeseen/Odenwaldkreis/Marbach-Stausee/Marbachtalsperre02.JPG",
+     *               "_id":"54e9dc7ec6ad161e1ca26bc0"
+     *           },
+     *           {
+     *               "copyright":"http://badeseen.hlug.de© HLUG",
+     *               "src":"http://badeseen.hlug.de/fileadmin/img_content/badeseen/Odenwaldkreis/Marbach-Stausee/Marbachtalsperre01_T.JPG",
+     *               "_id":"54e9dc7ec6ad161e1ca26bbf"
+     *           }
+     *       ],
+     *       "yearratings":[
+     *           {
+     *               "rating":1,
+     *               "year":"2011",
+     *               "_id":"54e9dc7ec6ad161e1ca26bc4"
+     *           },
+     *           {
+     *               "rating":1,
+     *               "year":"2012",
+     *               "_id":"54e9dc7ec6ad161e1ca26bc3"
+     *           },
+     *           {
+     *               "rating":1,
+     *               "year":"2013",
+     *               "_id":"54e9dc7ec6ad161e1ca26bc2"
+     *           }
+     *       ],
+     *       "extracurricularActivity":[
+     *           "ANGELSPORT",
+     *           "BADEN",
+     *           "SEGELN",
+     *           "WINDSURFEN"
+     *       ],
+     *       "measurements":[
+     *           {
+     *               "comment":"Zum Zeitpunkt der Probenahme herrschte kühles Wetter mit zeitweilig leichten Schauern, wie auch an den Vortagen",
+     *               "rating":1,
+     *               "escherichiaColi":"46",
+     *               "enterocsocci":"<15",
+     *               "date":"2014-08-20T22:00:00.000Z",
+     *               "_id":"54e9dc7ec6ad161e1ca26be7",
+     *               "waterTemperature":20
+     *           },
+     *           {
+     *               "comment":"Zum Zeitpunkt der Probenahme herrschte warmes Sommerwetter (wie auch an den Vortagen",
+     *               "rating":1,
+     *               "escherichiaColi":"15",
+     *               "enterocsocci":"<15",
+     *               "date":"2014-08-06T22:00:00.000Z",
+     *               "_id":"54e9dc7ec6ad161e1ca26be6",
+     *               "waterTemperature":24
+     *           }
+     *       ]
+     *   }
      *
      * @apiError (422) NoValidID ID is not valid
      *
