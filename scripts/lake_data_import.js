@@ -1,10 +1,11 @@
 #!/usr/local/bin/node
+
 'use strict';
 var fs = require('fs'),
     program = require('commander'),
     colors = require('colors'),
     q = require('q');
-    
+
 
 program
     .version('0.0.1')
@@ -33,26 +34,26 @@ function saveToMongoDB(data) {
 
     var promise = q();
 
-    promise.then(function(){
-        if(program.remove){
-            return Lake.find({}).removeQ();
-        }
-    })
-    .then(function(){
-        return q.all(data.map(function(row){
-            return Lake.updateQ({
-                _id: row._id
-            },row, {
-                upsert: true
-            });
-        }));
-    })
-    .catch(function(err){
-        console.log('Error:'.underline.red + ' ' + err);
-    })
-    .finally(function(){
-        mongoose.connection.close();
-    });
+    promise.then(function() {
+            if (program.remove) {
+                return Lake.find({}).removeQ();
+            }
+        })
+        .then(function() {
+            return q.all(data.map(function(row) {
+                return Lake.updateQ({
+                    _id: row._id
+                }, row, {
+                    upsert: true
+                });
+            }));
+        })
+        .catch(function(err) {
+            console.log('Error:'.underline.red + ' ' + err);
+        })
+        .finally(function() {
+            mongoose.connection.close();
+        });
 }
 
 try {
