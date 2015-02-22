@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "apidoc": {
-    "url" : "https://badeseen.andinfinity.de/api/v1"
+    "url": "https://badeseen.andinfinity.de/api/v1"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,8 @@
     "mocha-jshint": "0.0.9",
     "mocha-mongo": "^0.1.1",
     "mocha-steps": "0.0.1",
+    "mongoose-q": "0.0.15",
+    "q": "^1.1.2",
     "supertest": "^0.15.0"
   }
 }
