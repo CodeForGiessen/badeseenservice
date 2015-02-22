@@ -76,17 +76,17 @@
      * @apiSuccess (200) {Number} depthAvg average depth
      * @apiSuccess (200) {Number} depthMax maximal depth
      * @apiSuccess (200) {Array} extracurricularActivity activities
-     * @apiSuccess (200) {Number} heightAboveSeaLevel 
+     * @apiSuccess (200) {Number} heightAboveSeaLevel
      * @apiSuccess (200) {String} hlugurl url to hlug-website
-     * @apiSuccess (200) {Array} images of the lake 
+     * @apiSuccess (200) {Array} images of the lake
      * @apiSuccess (200) {String} introtext description
      * @apiSuccess (200) {String} lakeType
      * @apiSuccess (200) {Number} latitude
      * @apiSuccess (200) {Number} longitude
      * @apiSuccess (200) {Array} measurements of bacteria in the lake
      * @apiSuccess (200) {String} name name of the lake
-     * @apiSuccess (200) {String} openFrom start date of the season NOT the opening hours 
-     * @apiSuccess (200) {String} openTo end date of the season NOT the opening hours 
+     * @apiSuccess (200) {String} openFrom start date of the season NOT the opening hours
+     * @apiSuccess (200) {String} openTo end date of the season NOT the opening hours
      * @apiSuccess (200) {Object} operator lake operator
      * @apiSuccess (200) {Array} yearratings ratings of the lake
      * @apiSuccess (200) {Object} downloads pdfs and other downloads
