@@ -2,3 +2,4 @@ node_modules/**
 public/js/vendor/**
 coverage/**
 doc/**
+*/bower_components/**
