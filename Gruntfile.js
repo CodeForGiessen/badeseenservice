@@ -4,7 +4,7 @@
 
         grunt.initConfig({
             paths: {
-                js: ['*.js', 'models/**/*.js', 'api/**/*.js', 'scripts/**/*.js', 'test/*.js']
+                js: ['*.js', 'models/**/*.js', 'api/**/*.js', 'scripts/**/*.js', 'test/*.js', 'dashboard/*.js']
             },
 
             jshint: {

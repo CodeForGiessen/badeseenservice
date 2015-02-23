@@ -20,12 +20,15 @@
   },
   "homepage": "https://github.com/CodeForGiessen/badeseenservice",
   "dependencies": {
+    "async": "^0.9.0",
     "colors": "^1.0.3",
     "commander": "^2.6.0",
     "csv-parse": "0.0.6",
     "express": "^4.11.2",
+    "express-handlebars": "^1.2.1",
     "mongodb": "^1.4.31",
-    "mongoose": "^3.8.23"
+    "mongoose": "^3.8.23",
+    "usage": "^0.6.0"
   },
   "devDependencies": {
     "chai": "^2.0.0",

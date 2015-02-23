@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="Christian Schulze">
+
+    <!-- Bootstrap -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- main style -->
+    <link rel="stylesheet" media="screen" href="/public/css/main.css">
+
+    <!-- jQuery -->
+    <script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8" defer></script>
+
+    <title>{{ title }}</title>
+</head>
+
+<body class="site">
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav">
+            <ul class="nav">
+                <li>
+                    <a href="/">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/lakes">Lakes <span class="badge">{{ lake_count }}</span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <div class="wrap">
+
+        <div class="main-wrap content-wrap clearfix">
+            {{{body}}}
+        </div>
+
+    </div><!-- ./wrap -->
+
+    <footer class="navbar main-foot">
+        <div class="container">
+            <div class="col-md-4">
+                <p>Dies ist ein Projekt des OK Lab Gießen. Die Inhalte stehen unter der MIT-Lizenz auf <a href="https://github.com/CodeForGiessen/badeseenservice" title="Quelltext">GitHub</a> zur Verfügung.</p>
+            </div>
+
+            <div class="col-md-4" ng-show="contributors">
+                <h3 class="h3">Mitwirkende</h3>
+                <ul>
+                    <li>
+                        <a href="http://andinfinity.de" title="andinfinity.de">Christian Schulze</a>
+
+                        <small ng-show="contributor.mail" class=""><a href="mailto:chris@andinfinity.de"><span class="fa fa-envelope"></span></a></small>
+                    </li>
+                    <li>
+                        Vincent Elliot Wagner <small><a href="mailto:zockerticker+codeforgi@gmail.com"><span class="fa fa-envelope"></span></a></small>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-4" ng-show="labInfo.logoPath">
+                <a href="http://codefor.de/giessen/" title="Code for Gießen">
+                    <img ng-src="/public/img/cfgi-black.svg" alt="" width="200px" src="/public/img/cfgi-black.svg">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap -->
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>
+

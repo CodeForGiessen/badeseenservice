@@ -1,0 +1,25 @@
+<h1>{{ title }}</h1>
+
+<h2>Status</h2>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-info sys-stats-panel">
+			<div class="panel-heading">CPU usage</div>
+			<div class="panel-body">{{ sys_stats.cpu }}%</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<div class="panel panel-info sys-stats-panel">
+			<div class="panel-heading">Memory usage</div>
+			<div class="panel-body">{{ bytesToMegabytes sys_stats.memory }}MB</div>
+		</div>
+	</div>
+</div><!-- .row fin -->
+
+
+<h2>Build <img src="https://camo.githubusercontent.com/c42cfe7084ce9b3d1426f674539c47af42984672/687474703a2f2f63692e616e64696e66696e6974792e64652f636f6465666f726769657373656e2f626164657365656e736572766963652f62616467652f3f6272616e63683d6d6173746572" alt="strider badge"></h2>
+
+<div class="well">
+	{{>build}}
+</div>

@@ -1,0 +1,9 @@
+<h1>Lakes</h1>
+
+<ul class="list-group">
+	{{#each lakes}}
+  		<li class="list-group-item">
+    		<a href="/lakes/{{ this._id }}">{{ this.name }}</a>
+  		</li>
+  	{{/each}}
+</ul>

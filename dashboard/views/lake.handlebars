@@ -1,0 +1,12 @@
+<h1>{{ lake.name }}</h1>
+
+{{#each lake}}
+	<div class="panel panel-default">
+		<div class="panel-heading">{{@key}}</div>
+		<div class="panel-body">
+			<div class="well">
+				{{this}}
+			</div>
+		</div>
+	</div>
+{{/each}}

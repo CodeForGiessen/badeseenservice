@@ -9,9 +9,12 @@
 
     var app = exports.app = express();
 
-    /* set up API middleware */
-    var api = require('./api');
+    /* set up middleware */
+    var api = require('./api'),
+        dashboard = require('./dashboard');
+
     app.use(api);
+    app.use(dashboard);
 
     /* serve documentation as static content */
     app.use('/doc', express.static(__dirname + '/doc'));

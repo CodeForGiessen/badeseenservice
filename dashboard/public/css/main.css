@@ -1,0 +1,40 @@
+.sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 250px;
+    margin-top: 51px;
+}
+
+.wrap {
+	border-left: 1px solid #e7e7e7;
+	margin: 0 0 0 250px;
+	min-height: 342px;
+	padding: 0 30px;
+	position: inherit;
+}
+
+.main-foot {
+	border-top: 1px solid #e7e7e7;
+	padding: 2em 0.5em;
+}
+
+.main-foot h3 {
+	margin-top: 0;
+	padding-top: 0;
+	text-align: center;
+}
+
+.main-foot ul {
+	padding-left: 0;
+	text-align: center;
+}
+
+.main-foot li {
+	list-style-type: none;
+}
+
+/* home.handlebars */
+.sys-stats-panel .panel-body {
+	font-size: 1.5em;
+	text-align: center;
+}
