@@ -1,4 +1,4 @@
-# badeseenservice
+# badeseenservice ![strider build badge](http://ci.andinfinity.de/codeforgiessen/badeseenservice/badge/?branch=master)
 
 ## Installation
 ### Prerequisites
