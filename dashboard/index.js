@@ -97,9 +97,17 @@
                     });
                     next(err);
                 }
+                var obj = results[0].toObject();
+                var printableObj = {};
+
+                for (var key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        printableObj[key] = JSON.stringify(obj[key]);
+                    }
+                }
 
                 res.render('lake', {
-                    lake: results[0].toObject(),
+                    lake: printableObj,
                     lake_count: results[1]
                 });
             }
