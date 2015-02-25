@@ -5,7 +5,9 @@
         express = require('express'),
         exphbs = require('express-handlebars'),
         path = require('path'),
-        Lake = require('../models/lake').Lake;
+        multer = require('multer'),
+        Lake = require('../models/lake').Lake,
+        importData = require('../lib').importData;
 
     var app = module.exports = express();
 
@@ -23,6 +25,11 @@
     /* static stuff like css, js with static middleware */
     app.use('/public', express.static(__dirname + '/public'));
     app.use('/bower_components', express.static(__dirname + '/bower_components'));
+
+    /* multipart form middleware */
+    app.use(multer({
+        dest: './uploads/'
+    }));
 
     /* Routes */
     app.get('/', function(req, res, next) {
@@ -47,7 +54,6 @@
                 }
 
                 res.render('home', {
-                    title: 'Badeseen API Dashboard',
                     sys_stats: err ? {} : results[0],
                     lake_count: results[1] ? results[1] : 0,
                     helpers: {
@@ -112,6 +118,29 @@
                 });
             }
         );
+    });
+
+    app.get('/import', function(req, res, next) {
+        Lake.count({}, function(err, cnt) {
+            res.render('import', {
+                'lake_count': cnt
+            });
+        });
+    });
+
+    app.post('/import', function(req, res) {
+        importData.fromJSON(req.files[0].path,
+            true,
+            function(err) {
+                if (err) {
+                    res.status(420);
+                    res.json(JSON.stringify(err));
+                    console.log(JSON.stringify(err));
+                } else {
+                    res.status(200);
+                    res.json('success');
+                }
+            });
     });
 
     app.use(function(req, res, next) {

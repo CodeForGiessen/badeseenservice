@@ -1,0 +1,82 @@
+<h1 class="page-header">Import Data</h1>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#submit').on('click', function(e) {
+            var $form = $('#uploadForm');
+            var $progressBar = $form.find('.progress-bar').first();
+            var $fileInput = $form.find('input').first();
+
+            $form.addClass('sending');
+            $progressBar.addClass('active');
+
+            if ($fileInput.val() == "")
+                return false; // no file selected yet
+
+            var xhr, provider;
+
+            xhr = jQuery.ajaxSettings.xhr();
+
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', function (e) {
+                    if (e.lengthComputable) {
+                        var complete = (e.loaded / e.total) * 100;
+
+                        $progressBar.text(complete + '%');
+                        $progressBar.css('width', complete + '%');
+                    }
+                }, false);
+            } else {
+                console.info('no xhr upload');
+            }
+
+            provider = function() {
+                return xhr;
+            }
+
+            // build form data
+            var data = new FormData();
+            data.append(0, $fileInput.prop('files')[0]);
+
+            $.ajax({
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: data, 
+                xhr: provider,
+                success: function(res) {
+                    $form.removeClass('uploading');
+                    $progressBar.removeClass('active');
+                    $form.after('<p>Success!</p>');
+                }, error: function(err) {
+                    $form.after('<p>Error:' + err + '</p>');
+                }
+            });
+
+            return false; // prevent hard sending
+        });
+    });
+</script>
+
+<form class="upload-form"
+      id="uploadForm"
+      enctype="multipart/form-data"
+      action="/upload_json"
+      method="post">
+    <div class="form-group">
+        <label for="json_file">File</label>
+        <input type="file" name="json_file" />
+    </div>
+
+    <div class="form-group">
+        <div class="progress">
+            <!--<label id="progress-label"></label>-->
+            <div class="progress-bar progress-success-bar progress-bar-striped">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button id="submit" class="btn btn-primary" type="submit" name="submit">Upload</button>
+    </div>
+</form>

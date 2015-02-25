@@ -14,62 +14,62 @@
     <link rel="stylesheet" media="screen" href="/public/css/main.css">
 
     <!-- jQuery -->
-    <script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
     <title>{{ title }}</title>
 </head>
 
 <body class="site">
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav">
-            <ul class="nav">
-                <li>
-                    <a href="/">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/lakes">Lakes <span class="badge">{{ lake_count }}</span></a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.sidebar-collapse -->
-    </div>
-    <div class="wrap">
-
-        <div class="main-wrap content-wrap clearfix">
-            {{{body}}}
-        </div>
-
-    </div><!-- ./wrap -->
-
-    <footer class="navbar main-foot">
-        <div class="container">
-            <div class="col-md-4">
-                <p>Dies ist ein Projekt des OK Lab Gießen. Die Inhalte stehen unter der MIT-Lizenz auf <a href="https://github.com/CodeForGiessen/badeseenservice" title="Quelltext">GitHub</a> zur Verfügung.</p>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"></button>
+                <a class="navbar-brand" href="#">Badeseen</a>
             </div>
 
-            <div class="col-md-4" ng-show="contributors">
-                <h3 class="h3">Mitwirkende</h3>
-                <ul>
-                    <li>
-                        <a href="http://andinfinity.de" title="andinfinity.de">Christian Schulze</a>
-
-                        <small ng-show="contributor.mail" class=""><a href="mailto:chris@andinfinity.de"><span class="fa fa-envelope"></span></a></small>
-                    </li>
-                    <li>
-                        Vincent Elliot Wagner <small><a href="mailto:zockerticker+codeforgi@gmail.com"><span class="fa fa-envelope"></span></a></small>
-                    </li>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Dashboard</a></li>
+                    <li><a href="/api">API</a></li>
+                    <li><a href="/doc/index.html">Documentation</a></li>
                 </ul>
             </div>
+        </div>
+    </nav>
 
-            <div class="col-md-4" ng-show="labInfo.logoPath">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a href="/">Status</span></a>
+                    </li>
+                </ul>
+
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a href="/lakes">Lakes <span class="badge">{{ lake_count }}</span></a>
+                        <a href="/import">Import Data</a>
+                    </li>
+                </ul>
+
+                <p><small>Dies ist ein Projekt des OK Lab Gießen. Die Inhalte stehen unter der MIT-Lizenz auf <a href="https://github.com/CodeForGiessen/badeseenservice" title="Quelltext">GitHub</a> zur Verfügung.</small></p>
+
+                <br>
+
                 <a href="http://codefor.de/giessen/" title="Code for Gießen">
-                    <img ng-src="/public/img/cfgi-black.svg" alt="" width="200px" src="/public/img/cfgi-black.svg">
+                    <img alt="" width="100%" src="/public/img/cfgi-black.svg">
                 </a>
             </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {{{body}}}
+            </div>
         </div>
-    </footer>
+    </div>
+
     <!-- Bootstrap -->
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
 

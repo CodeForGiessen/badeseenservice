@@ -28,6 +28,7 @@
     "express-handlebars": "^1.2.1",
     "mongodb": "^1.4.31",
     "mongoose": "^3.8.23",
+    "multer": "^0.1.8",
     "usage": "^0.6.0"
   },
   "devDependencies": {
@@ -40,7 +41,6 @@
     "mocha-jshint": "0.0.9",
     "mocha-mongo": "^0.1.1",
     "mocha-steps": "0.0.1",
-    "mongoose-q": "0.0.15",
     "q": "^1.1.2",
     "supertest": "^0.15.0"
   }
