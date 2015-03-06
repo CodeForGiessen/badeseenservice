@@ -83,14 +83,12 @@
      * @apiSuccess (200) {String} lakeType type of lake
      * @apiSuccess (200) {Number} latitude latitude of position
      * @apiSuccess (200) {Number} longitude longitude of position
-     * @apiSuccess (200) {Array}  measurements of bacteria in the lake
      * @apiSuccess (200) {String} name name of the lake
      * @apiSuccess (200) {String} openFrom start date of the season NOT the opening hours
      * @apiSuccess (200) {String} openTo end date of the season NOT the opening hours
      * @apiSuccess (200) {Object} operator lake operator
      * @apiSuccess (200) {Array}  yearratings ratings of the lake
      * @apiSuccess (200) {Object} downloads pdfs and other downloads
-     * @apiSuccess (200) {Array}  messages notifications
      * @apiSuccess (200) {String} bathingPermission permission of bathing at the moment
      *
      * @apiSuccessExample Success-Response:
@@ -173,26 +171,6 @@
      *           "BADEN",
      *           "SEGELN",
      *           "WINDSURFEN"
-     *       ],
-     *       "measurements":[
-     *           {
-     *               "comment":"Zum Zeitpunkt der Probenahme herrschte kühles Wetter mit zeitweilig leichten Schauern, wie auch an den Vortagen",
-     *               "rating":1,
-     *               "escherichiaColi":"46",
-     *               "enterocsocci":"<15",
-     *               "date":"2014-08-20T22:00:00.000Z",
-     *               "_id":"54e9dc7ec6ad161e1ca26be7",
-     *               "waterTemperature":20
-     *           },
-     *           {
-     *               "comment":"Zum Zeitpunkt der Probenahme herrschte warmes Sommerwetter (wie auch an den Vortagen",
-     *               "rating":1,
-     *               "escherichiaColi":"15",
-     *               "enterocsocci":"<15",
-     *               "date":"2014-08-06T22:00:00.000Z",
-     *               "_id":"54e9dc7ec6ad161e1ca26be6",
-     *               "waterTemperature":24
-     *           }
      *       ]
      *   }
      *
@@ -207,7 +185,7 @@
      * @apiUse LakeNotFoundError
      */
     app.get('/api/v1/lakes/:id', function(req, res, next) {
-        crud.retrieveLake({
+        crud.retrieveLakeBaseData({
             '_id': req.params.id
         }, function(err, doc) {
             if (err) {

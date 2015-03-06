@@ -41,6 +41,7 @@
         newLake.save(callback);
     }
 
+
     /**
      * Get lake from database and call callback
      *
@@ -49,6 +50,19 @@
      */
     function retrieveLake(query, callback) {
         Lake.findOne(query, callback);
+    }
+
+    /**
+     * Get lake basedata (without subresources) from database and call callback
+     *
+     * @param  {Object}   query    Query
+     * @param  {Function} callback Function to call after execution
+     */
+    function retrieveLakeBaseData(query, callback) {
+        Lake.findOne(query, {
+            measurements: 0,
+            messages: 0
+        }, callback);
     }
 
     /**
@@ -75,6 +89,7 @@
 
     module.exports.createLake = createLake;
     module.exports.retrieveLake = retrieveLake;
+    module.exports.retrieveLakeBaseData = retrieveLakeBaseData;
     module.exports.updateLake = updateLake;
     module.exports.deleteLake = deleteLake;
     module.exports.isObjectId = isObjectId;
