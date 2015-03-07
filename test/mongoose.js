@@ -65,10 +65,10 @@
 
         it('should remove the lake', function(done) {
             crud.deleteLake({
-                'local.name': testLake.name
+                'name': testLake.name
             }, function(err, doc) {
+                console.log(doc);
                 if (err) throw err;
-
                 assert.equal(err, null);
                 done();
             });
