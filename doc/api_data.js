@@ -337,7 +337,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/lakes",
-    "title": "API entry point for lakes ressources",
+    "title": "get all lakes with their basedata",
     "name": "GetLakes",
     "group": "Lakes",
     "success": {
@@ -354,7 +354,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"self\": {\n        \"href\": \"/api/v1/lakes\"\n    },\n    \"_links\":{\n        \"507f1f77bcf86cd799439011\": {\n            \"href\": \"/api/v1/lakes/507f1f77bcf86cd799439011\"\n        }\n    }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"/api/v1/lakes\"\n         }\n     },\n     \"lakes\": [...]\n}",
           "type": "json"
         }
       ]
