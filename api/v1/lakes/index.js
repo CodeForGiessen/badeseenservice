@@ -38,7 +38,7 @@
      */
     app.get('/api/v1/lakes', function(req, res) {
         crud.retrieveLakesBaseData({},function(err,lakes){
-            res.status = 200;
+            res.statusCode = 200;
             var out = {};
             out._links = {};
             out._links.self = {
