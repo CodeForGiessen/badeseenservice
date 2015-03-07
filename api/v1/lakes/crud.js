@@ -14,9 +14,16 @@
         return Lake.ObjectId.isValid(id);
     }
 
+    function retrieveLakesBaseData(query, callback){
+        Lake.find(query, {
+            measurements: 0,
+            messages: 0
+        }, callback);
+    }
+
     function getAllObjectIDs(callback) {
         Lake.find({}, {
-            '_id': 1
+            '_id': 1,            
         }, function(err, doc) {
             var ids = [];
 
@@ -90,6 +97,7 @@
     module.exports.createLake = createLake;
     module.exports.retrieveLake = retrieveLake;
     module.exports.retrieveLakeBaseData = retrieveLakeBaseData;
+    module.exports.retrieveLakesBaseData = retrieveLakesBaseData;
     module.exports.updateLake = updateLake;
     module.exports.deleteLake = deleteLake;
     module.exports.isObjectId = isObjectId;

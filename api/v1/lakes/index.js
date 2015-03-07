@@ -19,7 +19,7 @@
      */
 
     /**
-     * @api {get} /lakes API entry point for lakes ressources
+     * @api {get} /lakes get all lakes with their basedata
      * @apiName GetLakes
      * @apiGroup Lakes
      *
@@ -28,37 +28,50 @@
      * @apiSuccessExample {json} Success-Response:
      *      HTTP/1.1 200 OK
      *      {
-     *          "self": {
-     *              "href": "/api/v1/lakes"
-     *          },
-     *          "_links":{
-     *              "507f1f77bcf86cd799439011": {
-     *                  "href": "/api/v1/lakes/507f1f77bcf86cd799439011"
-     *              }
-     *          }
+     *          "_links": {
+     *              "self": {
+     *                  "href": "/api/v1/lakes"
+     *               }
+     *           },
+     *           "lakes": [...]
      *      }
      */
-    app.get('/api/v1/lakes', function(req, res) {
-        crud.getAllObjectIDs(function(err, ids) {
+    app.get('/api/v1/lakes', function(req, res, next) {
+        crud.retrieveLakesBaseData({},function(err,lakes){
             res.status = 200;
-
             var out = {};
-            out._links = [];
-
-            ids.forEach(function(elt, index) {
-                var obj = {};
-                obj[elt] = {
-                    href: '/api/v1/lakes/' + elt
-                };
-                out._links.push(obj);
-            });
-
-            out.self = {
+            out._links = {};
+            out._links.self = {
                 'href': '/api/v1/lakes'
             };
 
+            out.lakes = lakes;
+
             res.json(out);
+
         });
+
+
+        // crud.getAllObjectIDs(function(err, ids) {
+        //     res.status = 200;
+
+        //     var out = {};
+        //     out._links = [];
+
+        //     ids.forEach(function(elt, index) {
+        //         var obj = {};
+        //         obj[elt] = {
+        //             href: '/api/v1/lakes/' + elt
+        //         };
+        //         out._links.push(obj);
+        //     });
+
+        //     out.self = {
+        //         'href': '/api/v1/lakes'
+        //     };
+
+        //     res.json(out);
+        // });
     });
 
     /**
