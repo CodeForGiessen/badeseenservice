@@ -343,6 +343,44 @@
                         assert.notEqual(doc, null, 'returned document should not be null');
                         assert.ok(doc._links);
 
+
+                        done();
+                    }
+                });
+        });
+    });
+
+    describe('GET /api/v1/lakes/all', function() {
+        var allLakeIds;
+        before(function(done){
+            crud.getAllObjectIDs(function(err,ids){
+                if(err) return done(err);
+                else{
+                    allLakeIds = ids.map(function(id){
+                        return id.toString();
+                    });
+                    done();
+                }
+            });
+        });
+        it('should return all lakes', function(done) {
+            request(app)
+                .get('/api/v1/lakes/all')
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    else {
+                        var doc = res.body;
+
+                        assert.notEqual(doc, null, 'returned document should not be null');
+                        assert.ok(doc._links);
+                        assert.ok(doc.lakes);
+
+                        var ids = doc.lakes.map(function(doc){
+                            return doc._id;
+                        });
+                        assert.deepEqual(allLakeIds,ids);
+                       
                         done();
                     }
                 });

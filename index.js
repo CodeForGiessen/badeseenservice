@@ -19,10 +19,11 @@
         next();
     });
     app.use(api);
+    
+     /* serve documentation as static content */     
+    app.use('/doc', express.static('./doc'));
     app.use(dashboard);
 
-    /* serve documentation as static content */
-    app.use('/doc', express.static(__dirname + '/doc'));
 
     /* Mongoose */
     /* Establish database connection: either use the specified `DB_URI=ADRESS_TO_MONGODB`

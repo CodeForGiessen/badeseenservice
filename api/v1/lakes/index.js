@@ -17,10 +17,59 @@
      *       "error": "LakeNotFound"
      *     }
      */
+    
+    /**
+     * @api {get} /lakes API entry point for lakes ressources
+     * @apiName GetLakes
+     * @apiGroup Lakes
+     *
+     * @apiSuccess (200) 200 OK
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *      {
+     *          "self": {
+     *              "href": "/api/v1/lakes"
+     *          },
+     *          "all" : {
+     *              "href": "/api/v1/lakes/all"
+     *          },
+     *          "_links":{
+     *              "507f1f77bcf86cd799439011": {
+     *                  "href": "/api/v1/lakes/507f1f77bcf86cd799439011"
+     *              }
+     *          }
+     *      }
+     */
+    app.get('/api/v1/lakes', function(req, res) {
+        crud.getAllObjectIDs(function(err, ids) {
+            res.status = 200;
+
+            var out = {};
+            out._links = [];
+
+            ids.forEach(function(elt, index) {
+                var obj = {};
+                obj[elt] = {
+                    href: '/api/v1/lakes/' + elt
+                };
+                out._links.push(obj);
+            });
+
+            out.self = {
+                'href': '/api/v1/lakes'
+            };
+            out.all = {
+                'href': '/api/v1/lakes/all'  
+            };
+
+            res.json(out);
+        });
+    });
 
     /**
-     * @api {get} /lakes get all lakes with their basedata
-     * @apiName GetLakes
+     * @api {get} /lakes/all get all lakes with their basedata
+     * @apiName GetAllLakes
      * @apiGroup Lakes
      *
      * @apiSuccess (200) 200 OK
@@ -30,13 +79,13 @@
      *      {
      *          "_links": {
      *              "self": {
-     *                  "href": "/api/v1/lakes"
+     *                  "href": "/api/v1/lakes/all"
      *               }
      *           },
      *           "lakes": [...]
      *      }
      */
-    app.get('/api/v1/lakes', function(req, res) {
+    app.get('/api/v1/lakes/all', function(req, res) {
         crud.retrieveLakesBaseData({},function(err,lakes){
             res.statusCode = 200;
             var out = {};
@@ -49,29 +98,7 @@
 
             res.json(out);
 
-        });
-
-
-        // crud.getAllObjectIDs(function(err, ids) {
-        //     res.status = 200;
-
-        //     var out = {};
-        //     out._links = [];
-
-        //     ids.forEach(function(elt, index) {
-        //         var obj = {};
-        //         obj[elt] = {
-        //             href: '/api/v1/lakes/' + elt
-        //         };
-        //         out._links.push(obj);
-        //     });
-
-        //     out.self = {
-        //         'href': '/api/v1/lakes'
-        //     };
-
-        //     res.json(out);
-        // });
+        });      
     });
 
     /**
