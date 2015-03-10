@@ -21,6 +21,21 @@
         }, callback);
     }
 
+    function retrieveLakesWeatherData(query, callback){
+        Lake.find(query, {
+            weather: 1,
+            _id:1
+        }, function(err,doc){
+            var weathers = {};
+            if(!err){
+                doc.forEach(function(elt, index) {
+                    weathers[elt._id] = elt.weather;
+                });
+            }
+            callback(err,weathers);
+        });
+    }
+
     function getAllObjectIDs(callback) {
         Lake.find({}, {
             '_id': 1,            
@@ -98,6 +113,7 @@
     module.exports.retrieveLake = retrieveLake;
     module.exports.retrieveLakeBaseData = retrieveLakeBaseData;
     module.exports.retrieveLakesBaseData = retrieveLakesBaseData;
+    module.exports.retrieveLakesWeatherData = retrieveLakesWeatherData;
     module.exports.updateLake = updateLake;
     module.exports.deleteLake = deleteLake;
     module.exports.isObjectId = isObjectId;

@@ -88,6 +88,35 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/lakes/allweather",
+    "title": "get the weather of all lakes",
+    "name": "GetAllWeather",
+    "group": "Lakes",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "optional": false,
+            "field": "200",
+            "description": "<p>OK</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"/api/v1/lakes/allweather\"\n         }\n     },\n     \"weatherdata\": {\n         \"54e88e163aa8ccc41e1ab82e\" : {\n             ...\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/v1/lakes/index.js",
+    "groupTitle": "Lakes"
+  },
+  {
+    "type": "get",
     "url": "/lakes/:id",
     "title": "Get Lake",
     "name": "GetLake",
@@ -336,6 +365,68 @@ define({ "api": [
         {
           "title": "Success-Response:",
           "content": "HTTP/1.1 200 OK\n{\n    \"measurements\":\n    [\n        {\n            \"comment\": \"\",\n            \"rating\": 1,\n            \"escherichiaColi\": \"15\",\n            \"enterocsocci\": \"15\",\n            \"waterTemperature\": 20,\n            \"date\": \"2014-08-18T22:00:00.000Z\"\n           }, {\n               \"comment\": \"\",\n               \"rating\": 1,\n               \"escherichiaColi\": \"<15\",\n               \"enterocsocci\": \"<15\",\n               \"waterTemperature\": 24,\n               \"date\": \"2014-08-04T22:00:00.000Z\"\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/v1/lakes/index.js",
+    "groupTitle": "Lakes",
+    "error": {
+      "fields": {
+        "404 Not Found": [
+          {
+            "group": "404 Not Found",
+            "optional": false,
+            "field": "LakeNotFound",
+            "description": "<p>The id of the Lake was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"LakeNotFound\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/lake/:id/weather",
+    "title": "Get lake weather",
+    "name": "GetLakeWeather",
+    "group": "Lakes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>unique lake id</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Array",
+            "optional": false,
+            "field": "weatherdata",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"weather\":{\n         \"current\": {\n               \"wind\": {\n                   \"speed\": 1.72,\n                   \"deg\": 276.504\n               },\n               \"clouds\": {\n                   \"all\": 88\n               },\n               \"weather\":\n                   [\n                       {\n                           \"icon\": \"04d\",\n                           \"description\": \"overcast clouds\",\n                           \"main\": \"Clouds\",\n                           \"id\": 804,\n                           \"_id\": \"54fefa48a2f4c5151b8f302b\"\n                       }\n                   ],\n               \"temp\": \"8.291\",\n               \"temp_min\": 8.291,\n               \"temp_max\": 8.291,\n               \"humidity\": 90,\n               \"pressure\": 978.14,\n               \"lastUpdated\": \"2015-03-10T13:44:23.000Z\"\n           },\n           \"openWeatherCityId\": 2812482\n       }\n  }",
           "type": "json"
         }
       ]

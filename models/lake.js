@@ -60,6 +60,33 @@
         generalInformation: String
     };
 
+
+    var weather = {
+        openWeatherCityId: Number,
+        current: {
+            weather: [{
+                id: Number,
+                main: String,
+                description: String,
+                icon: String
+            }],
+            temp: String,
+            temp_min: Number,
+            temp_max: Number,
+            humidity: Number,
+            pressure: Number,
+            wind: {
+                speed: Number,
+                deg: Number
+            },
+            clouds: {
+                all: Number
+            },
+            lastUpdated: Date
+        }
+    };  
+        
+
     var lakeSchema = new Schema({
         name: String,
         hlugurl: String,
@@ -82,7 +109,8 @@
         operator: operator,
         appropriateAuthority: appropriateAuthority,
         messages: [messages],
-        downloads: downloads
+        downloads: downloads,
+        weather: weather
     });
 
     var Lake = mongoose.model('Lake', lakeSchema);

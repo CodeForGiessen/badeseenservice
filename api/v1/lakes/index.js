@@ -62,6 +62,9 @@
             out.all = {
                 'href': '/api/v1/lakes/all'  
             };
+            out.allweather = {
+                'href': '/api/v1/lakes/allweather'
+            };
 
             res.json(out);
         });
@@ -91,10 +94,48 @@
             var out = {};
             out._links = {};
             out._links.self = {
-                'href': '/api/v1/lakes'
+                'href': '/api/v1/lakes/all'
             };
 
             out.lakes = lakes;
+
+            res.json(out);
+
+        });      
+    });
+
+    /**
+     * @api {get} /lakes/allweather get the weather of all lakes 
+     * @apiName GetAllWeather
+     * @apiGroup Lakes
+     *
+     * @apiSuccess (200) 200 OK
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *      {
+     *          "_links": {
+     *              "self": {
+     *                  "href": "/api/v1/lakes/allweather"
+     *               }
+     *           },
+     *           "weatherdata": {
+     *               "54e88e163aa8ccc41e1ab82e" : {
+     *                   ...
+     *               }
+     *           }
+     *      }
+     */
+    app.get('/api/v1/lakes/allweather', function(req, res) {
+        crud.retrieveLakesWeatherData({},function(err,weatherdatas){
+            res.statusCode = 200;
+            var out = {};
+            out._links = {};
+            out._links.self = {
+                'href': '/api/v1/lakes/allweather'
+            };
+
+            out.weatherdatas = weatherdatas;
 
             res.json(out);
 
@@ -319,6 +360,84 @@
                 res.statusCode = 200;
                 res.json({
                     'measurements': doc.measurements
+                });
+            }
+        });
+    });
+     /**
+     * @api {get} /lake/:id/weather Get lake weather
+     * @apiName GetLakeWeather
+     * @apiGroup Lakes
+     *
+     * @apiParam {String} id unique lake id
+     *
+     * @apiSuccess (200) {Array} weatherdata
+     *
+     * @apiSuccessExample Success-Response:
+     *    HTTP/1.1 200 OK
+     *    {
+     *        "weather":{
+     *             "current": {
+     *                   "wind": {
+     *                       "speed": 1.72,
+     *                       "deg": 276.504
+     *                   },
+     *                   "clouds": {
+     *                       "all": 88
+     *                   },
+     *                   "weather":
+     *                       [
+     *                           {
+     *                               "icon": "04d",
+     *                               "description": "overcast clouds",
+     *                               "main": "Clouds",
+     *                               "id": 804,
+     *                               "_id": "54fefa48a2f4c5151b8f302b"
+     *                           }
+     *                       ],
+     *                   "temp": "8.291",
+     *                   "temp_min": 8.291,
+     *                   "temp_max": 8.291,
+     *                   "humidity": 90,
+     *                   "pressure": 978.14,
+     *                   "lastUpdated": "2015-03-10T13:44:23.000Z"
+     *               },
+     *               "openWeatherCityId": 2812482
+     *           }
+     *      }
+     *      
+     *
+     * @apiUse LakeNotFoundError
+     */
+    app.get('/api/v1/lakes/:id/weather', function(req, res, next) {
+        crud.retrieveLake({
+            '_id': req.params.id,
+        }, function(err, doc) {
+            if (err) {
+                if (err.name === "CastError" && err.type === "ObjectId") {
+                    res.statusCode = 422;
+                    res.json({
+                        "error": "NoValidID"
+                    });
+                } else {
+                    res.statusCode = 500;
+                    res.json({
+                        "error": err
+                    });
+                }
+
+                next(err);
+            }
+
+            if (doc === null) {
+                res.statusCode = 404;
+                res.json({
+                    "error": "LakeNotFound"
+                });
+            } else {
+                res.statusCode = 200;
+                res.json({
+                    'weather': doc.weather
                 });
             }
         });
