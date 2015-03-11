@@ -422,6 +422,41 @@
         });
     });
 
+    describe('GET /api/v1/lakes/allmessages', function() {
+        var allLakeIds;
+        before(function(done){
+            crud.getAllObjectIDs(function(err,ids){
+                if(err) return done(err);
+                else{
+                    allLakeIds = ids.map(function(id){
+                        return id.toString();
+                    });
+                    done();
+                }
+            });
+        });
+        it('should return weatherdata for all lakes', function(done) {
+            request(app)
+                .get('/api/v1/lakes/allmessages')
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    else {
+                        var doc = res.body;
+
+                        assert.notEqual(doc, null, 'returned document should not be null');
+                        assert.ok(doc._links);
+                        assert.ok(doc.messages);
+
+                        var ids = Object.keys(doc.messages);
+                        assert.deepEqual(allLakeIds,ids);
+                       
+                        done();
+                    }
+                });
+        });
+    });
+
     describe('GET /api/v1/lakes/:id', function() {
         it('should return status 422', function(done) {
             request(app)
@@ -523,6 +558,40 @@
 
                     assert.notEqual(doc, null, "returned document should not be null");
                     assert.ok(doc.weather);
+                    done();
+                });
+        });
+    });
+    describe('GET /api/v1/lakes/:id/messages', function() {
+        it('should return status 422', function(done) {
+            request(app)
+                .get('/api/v1/lakes/thisisnoid/messages')
+                .expect(422)
+                .end(function(err) {
+                    done(err);
+                });
+        });
+
+        it('should return status 404', function(done) {
+            request(app)
+                .get('/api/v1/lakes/000000000000000000000000/messages')
+                .expect(404)
+                .end(function(err) {
+                    done(err);
+                });
+        });
+
+        it('should return status 200', function(done) {
+            request(app)
+                .get('/api/v1/lakes/' + testLakeId + '/messages')
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) return done(err);
+
+                    var doc = res.body;
+
+                    assert.notEqual(doc, null, "returned document should not be null");
+                    assert.ok(doc.messages);
                     done();
                 });
         });

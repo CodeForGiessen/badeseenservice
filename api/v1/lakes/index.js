@@ -143,6 +143,44 @@
     });
 
     /**
+     * @api {get} /lakes/allmessages get the messages of all lakes 
+     * @apiName GetAllMessages
+     * @apiGroup Lakes
+     *
+     * @apiSuccess (200) 200 OK
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *      {
+     *          "_links": {
+     *              "self": {
+     *                  "href": "/api/v1/lakes/allmessages"
+     *               }
+     *           },
+     *           "messages": {
+     *               "54e88e163aa8ccc41e1ab82e" : {
+     *                   ...
+     *               }
+     *           }
+     *      }
+     */
+    app.get('/api/v1/lakes/allmessages', function(req, res) {
+        crud.retrieveLakesMessages({},function(err,messages){
+            res.statusCode = 200;
+            var out = {};
+            out._links = {};
+            out._links.self = {
+                'href': '/api/v1/lakes/allmessages'
+            };
+
+            out.messages = messages;
+
+            res.json(out);
+
+        });      
+    });
+
+    /**
      * @api {get} /lakes/:id Get Lake
      * @apiName GetLake
      * @apiGroup Lakes
@@ -364,6 +402,7 @@
             }
         });
     });
+
      /**
      * @api {get} /lake/:id/weather Get lake weather
      * @apiName GetLakeWeather
@@ -371,7 +410,7 @@
      *
      * @apiParam {String} id unique lake id
      *
-     * @apiSuccess (200) {Array} weatherdata
+     * @apiSuccess (200) {Object} weatherdata
      *
      * @apiSuccessExample Success-Response:
      *    HTTP/1.1 200 OK
@@ -438,6 +477,85 @@
                 res.statusCode = 200;
                 res.json({
                     'weather': doc.weather
+                });
+            }
+        });
+    });
+
+     /**
+     * @api {get} /lake/:id/messages Get lake messages
+     * @apiName GetLakeMessages
+     * @apiGroup Lakes
+     *
+     * @apiParam {String} id unique lake id
+     *
+     * @apiSuccess (200) {Array} messages
+     *
+     * @apiSuccessExample Success-Response:
+     *    HTTP/1.1 200 OK
+     *    {
+     *        "weather":{
+     *             "current": {
+     *                   "wind": {
+     *                       "speed": 1.72,
+     *                       "deg": 276.504
+     *                   },
+     *                   "clouds": {
+     *                       "all": 88
+     *                   },
+     *                   "weather":
+     *                       [
+     *                           {
+     *                               "icon": "04d",
+     *                               "description": "overcast clouds",
+     *                               "main": "Clouds",
+     *                               "id": 804,
+     *                               "_id": "54fefa48a2f4c5151b8f302b"
+     *                           }
+     *                       ],
+     *                   "temp": "8.291",
+     *                   "temp_min": 8.291,
+     *                   "temp_max": 8.291,
+     *                   "humidity": 90,
+     *                   "pressure": 978.14,
+     *                   "lastUpdated": "2015-03-10T13:44:23.000Z"
+     *               },
+     *               "openWeatherCityId": 2812482
+     *           }
+     *      }
+     *      
+     *
+     * @apiUse LakeNotFoundError
+     */
+    app.get('/api/v1/lakes/:id/messages', function(req, res, next) {
+        crud.retrieveLake({
+            '_id': req.params.id,
+        }, function(err, doc) {
+            if (err) {
+                if (err.name === "CastError" && err.type === "ObjectId") {
+                    res.statusCode = 422;
+                    res.json({
+                        "error": "NoValidID"
+                    });
+                } else {
+                    res.statusCode = 500;
+                    res.json({
+                        "error": err
+                    });
+                }
+
+                next(err);
+            }
+
+            if (doc === null) {
+                res.statusCode = 404;
+                res.json({
+                    "error": "LakeNotFound"
+                });
+            } else {
+                res.statusCode = 200;
+                res.json({
+                    'messages': doc.messages
                 });
             }
         });

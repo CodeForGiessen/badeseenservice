@@ -36,6 +36,21 @@
         });
     }
 
+    function retrieveLakesMessages(query, callback){
+        Lake.find(query, {
+            messages: 1,
+            _id:1
+        }, function(err,doc){
+            var messages = {};
+            if(!err){
+                doc.forEach(function(elt, index) {
+                    messages[elt._id] = elt.messages;
+                });
+            }
+            callback(err,messages);
+        });
+    }
+
     function getAllObjectIDs(callback) {
         Lake.find({}, {
             '_id': 1,            
@@ -83,7 +98,8 @@
     function retrieveLakeBaseData(query, callback) {
         Lake.findOne(query, {
             measurements: 0,
-            messages: 0
+            messages: 0,
+            weather: 0
         }, callback);
     }
 
@@ -114,6 +130,9 @@
     module.exports.retrieveLakeBaseData = retrieveLakeBaseData;
     module.exports.retrieveLakesBaseData = retrieveLakesBaseData;
     module.exports.retrieveLakesWeatherData = retrieveLakesWeatherData;
+    module.exports.retrieveLakesMessages = retrieveLakesMessages;
+
+    
     module.exports.updateLake = updateLake;
     module.exports.deleteLake = deleteLake;
     module.exports.isObjectId = isObjectId;
