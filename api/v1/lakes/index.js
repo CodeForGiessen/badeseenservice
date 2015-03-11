@@ -158,9 +158,7 @@
      *               }
      *           },
      *           "messages": {
-     *               "54e88e163aa8ccc41e1ab82e" : {
-     *                   ...
-     *               }
+     *               "54e88e163aa8ccc41e1ab82e" : [...]
      *           }
      *      }
      */
@@ -494,34 +492,13 @@
      * @apiSuccessExample Success-Response:
      *    HTTP/1.1 200 OK
      *    {
-     *        "weather":{
-     *             "current": {
-     *                   "wind": {
-     *                       "speed": 1.72,
-     *                       "deg": 276.504
-     *                   },
-     *                   "clouds": {
-     *                       "all": 88
-     *                   },
-     *                   "weather":
-     *                       [
-     *                           {
-     *                               "icon": "04d",
-     *                               "description": "overcast clouds",
-     *                               "main": "Clouds",
-     *                               "id": 804,
-     *                               "_id": "54fefa48a2f4c5151b8f302b"
-     *                           }
-     *                       ],
-     *                   "temp": "8.291",
-     *                   "temp_min": 8.291,
-     *                   "temp_max": 8.291,
-     *                   "humidity": 90,
-     *                   "pressure": 978.14,
-     *                   "lastUpdated": "2015-03-10T13:44:23.000Z"
-     *               },
-     *               "openWeatherCityId": 2812482
-     *           }
+     *           "messages": [
+     *              {
+     *                  "message": "Badebetrieb am Perfstausee wird bis auf Weiteres eingestellt",
+     *                   "date": "2015-03-09T23:00:00.000Z",
+     *                  "_id": "54fefa48a2f4c5151b8f320a"
+     *               }
+     *           ]
      *      }
      *      
      *

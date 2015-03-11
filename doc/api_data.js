@@ -88,6 +88,35 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/lakes/allmessages",
+    "title": "get the messages of all lakes",
+    "name": "GetAllMessages",
+    "group": "Lakes",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "optional": false,
+            "field": "200",
+            "description": "<p>OK</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"/api/v1/lakes/allmessages\"\n         }\n     },\n     \"messages\": {\n         \"54e88e163aa8ccc41e1ab82e\" : [...]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/v1/lakes/index.js",
+    "groupTitle": "Lakes"
+  },
+  {
+    "type": "get",
     "url": "/lakes/allweather",
     "title": "get the weather of all lakes",
     "name": "GetAllWeather",
@@ -394,6 +423,68 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/lake/:id/messages",
+    "title": "Get lake messages",
+    "name": "GetLakeMessages",
+    "group": "Lakes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>unique lake id</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Array",
+            "optional": false,
+            "field": "messages",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n       \"messages\": [\n          {\n              \"message\": \"Badebetrieb am Perfstausee wird bis auf Weiteres eingestellt\",\n               \"date\": \"2015-03-09T23:00:00.000Z\",\n              \"_id\": \"54fefa48a2f4c5151b8f320a\"\n           }\n       ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/v1/lakes/index.js",
+    "groupTitle": "Lakes",
+    "error": {
+      "fields": {
+        "404 Not Found": [
+          {
+            "group": "404 Not Found",
+            "optional": false,
+            "field": "LakeNotFound",
+            "description": "<p>The id of the Lake was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"LakeNotFound\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
     "url": "/lake/:id/weather",
     "title": "Get lake weather",
     "name": "GetLakeWeather",
@@ -416,7 +507,7 @@ define({ "api": [
         "200": [
           {
             "group": "200",
-            "type": "Array",
+            "type": "Object",
             "optional": false,
             "field": "weatherdata",
             "description": ""
