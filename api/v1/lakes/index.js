@@ -34,6 +34,12 @@
      *          "all" : {
      *              "href": "/api/v1/lakes/all"
      *          },
+     *          "allweather" : {
+     *              "href": "/api/v1/lakes/allweather"
+     *          },
+     *          "allmessages" : {
+     *              "href": "/api/v1/lakes/allmessages"
+     *          },
      *          "_links":{
      *              "507f1f77bcf86cd799439011": {
      *                  "href": "/api/v1/lakes/507f1f77bcf86cd799439011"
@@ -64,6 +70,9 @@
             };
             out.allweather = {
                 'href': '/api/v1/lakes/allweather'
+            };
+            out.allmessages = {
+                'href': '/api/v1/lakes/allmessages'  
             };
 
             res.json(out);
