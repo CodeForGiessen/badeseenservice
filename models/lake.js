@@ -84,8 +84,8 @@
             },
             lastUpdated: Date
         }
-    };  
-        
+    };
+
 
     var lakeSchema = new Schema({
         name: String,

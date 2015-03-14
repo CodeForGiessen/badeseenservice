@@ -68,6 +68,7 @@
                 'name': testLake.name
             }, function(err, doc) {
                 if (err) throw err;
+
                 assert.equal(err, null);
                 done();
             });

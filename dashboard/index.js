@@ -39,6 +39,7 @@
                     // get system stats
                     var usage = require('usage');
                     var pid = process.pid;
+
                     usage.lookup(pid, callback);
                 },
                 function(callback) {
@@ -50,6 +51,7 @@
                     res.render('error', {
                         error: err
                     });
+
                     next(err);
                 }
 
@@ -101,8 +103,10 @@
                     res.render('error', {
                         error: err
                     });
+
                     next(err);
                 }
+
                 var obj = results[0].toObject();
                 var printableObj = {};
 

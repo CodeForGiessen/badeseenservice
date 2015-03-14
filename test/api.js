@@ -343,7 +343,6 @@
                         assert.notEqual(doc, null, 'returned document should not be null');
                         assert.ok(doc._links);
 
-
                         done();
                     }
                 });
@@ -352,17 +351,20 @@
 
     describe('GET /api/v1/lakes/all', function() {
         var allLakeIds;
-        before(function(done){
-            crud.getAllObjectIDs(function(err,ids){
-                if(err) return done(err);
-                else{
-                    allLakeIds = ids.map(function(id){
+
+        before(function(done) {
+            crud.getAllObjectIDs(function(err, ids) {
+                if (err) return done(err);
+                else {
+                    allLakeIds = ids.map(function(id) {
                         return id.toString();
                     });
+
                     done();
                 }
             });
         });
+
         it('should return all lakes', function(done) {
             request(app)
                 .get('/api/v1/lakes/all')
@@ -370,36 +372,40 @@
                 .end(function(err, res) {
                     if (err) return done(err);
                     else {
-                        var doc = res.body;
+                        var doc = res.body,
+                            ids = null;
 
                         assert.notEqual(doc, null, 'returned document should not be null');
                         assert.ok(doc._links);
                         assert.ok(doc.lakes);
 
-                        var ids = doc.lakes.map(function(doc){
+                        ids = doc.lakes.map(function(doc) {
                             return doc._id;
                         });
-                        assert.deepEqual(allLakeIds,ids);
-                       
+
+                        assert.deepEqual(allLakeIds, ids);
                         done();
                     }
                 });
         });
     });
-    
+
     describe('GET /api/v1/lakes/allweather', function() {
         var allLakeIds;
-        before(function(done){
-            crud.getAllObjectIDs(function(err,ids){
-                if(err) return done(err);
-                else{
-                    allLakeIds = ids.map(function(id){
+
+        before(function(done) {
+            crud.getAllObjectIDs(function(err, ids) {
+                if (err) return done(err);
+                else {
+                    allLakeIds = ids.map(function(id) {
                         return id.toString();
                     });
+
                     done();
                 }
             });
         });
+
         it('should return weatherdata for all lakes', function(done) {
             request(app)
                 .get('/api/v1/lakes/allweather')
@@ -407,15 +413,16 @@
                 .end(function(err, res) {
                     if (err) return done(err);
                     else {
-                        var doc = res.body;
+                        var doc = res.body,
+                            ids = null;
 
                         assert.notEqual(doc, null, 'returned document should not be null');
                         assert.ok(doc._links);
                         assert.ok(doc.weatherdatas);
 
-                        var ids = Object.keys(doc.weatherdatas);
-                        assert.deepEqual(allLakeIds,ids);
-                       
+                        ids = Object.keys(doc.weatherdatas);
+                        assert.deepEqual(allLakeIds, ids);
+
                         done();
                     }
                 });
@@ -424,17 +431,20 @@
 
     describe('GET /api/v1/lakes/allmessages', function() {
         var allLakeIds;
-        before(function(done){
-            crud.getAllObjectIDs(function(err,ids){
-                if(err) return done(err);
-                else{
-                    allLakeIds = ids.map(function(id){
+
+        before(function(done) {
+            crud.getAllObjectIDs(function(err, ids) {
+                if (err) return done(err);
+                else {
+                    allLakeIds = ids.map(function(id) {
                         return id.toString();
                     });
+
                     done();
                 }
             });
         });
+
         it('should return weatherdata for all lakes', function(done) {
             request(app)
                 .get('/api/v1/lakes/allmessages')
@@ -442,15 +452,16 @@
                 .end(function(err, res) {
                     if (err) return done(err);
                     else {
-                        var doc = res.body;
+                        var doc = res.body,
+                            ids = null;
 
                         assert.notEqual(doc, null, 'returned document should not be null');
                         assert.ok(doc._links);
                         assert.ok(doc.messages);
 
-                        var ids = Object.keys(doc.messages);
-                        assert.deepEqual(allLakeIds,ids);
-                       
+                        ids = Object.keys(doc.messages);
+                        assert.deepEqual(allLakeIds, ids);
+
                         done();
                     }
                 });

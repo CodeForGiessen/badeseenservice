@@ -17,7 +17,7 @@
      *       "error": "LakeNotFound"
      *     }
      */
-    
+
     /**
      * @api {get} /lakes API entry point for lakes ressources
      * @apiName GetLakes
@@ -66,13 +66,13 @@
                 'href': '/api/v1/lakes'
             };
             out.all = {
-                'href': '/api/v1/lakes/all'  
+                'href': '/api/v1/lakes/all'
             };
             out.allweather = {
                 'href': '/api/v1/lakes/allweather'
             };
             out.allmessages = {
-                'href': '/api/v1/lakes/allmessages'  
+                'href': '/api/v1/lakes/allmessages'
             };
 
             res.json(out);
@@ -98,7 +98,7 @@
      *      }
      */
     app.get('/api/v1/lakes/all', function(req, res) {
-        crud.retrieveLakesBaseData({},function(err,lakes){
+        crud.retrieveLakesBaseData({}, function(err, lakes) {
             res.statusCode = 200;
             var out = {};
             out._links = {};
@@ -110,11 +110,11 @@
 
             res.json(out);
 
-        });      
+        });
     });
 
     /**
-     * @api {get} /lakes/allweather get the weather of all lakes 
+     * @api {get} /lakes/allweather get the weather of all lakes
      * @apiName GetAllWeather
      * @apiGroup Lakes
      *
@@ -136,7 +136,7 @@
      *      }
      */
     app.get('/api/v1/lakes/allweather', function(req, res) {
-        crud.retrieveLakesWeatherData({},function(err,weatherdatas){
+        crud.retrieveLakesWeatherData({}, function(err, weatherdatas) {
             res.statusCode = 200;
             var out = {};
             out._links = {};
@@ -148,11 +148,11 @@
 
             res.json(out);
 
-        });      
+        });
     });
 
     /**
-     * @api {get} /lakes/allmessages get the messages of all lakes 
+     * @api {get} /lakes/allmessages get the messages of all lakes
      * @apiName GetAllMessages
      * @apiGroup Lakes
      *
@@ -172,7 +172,7 @@
      *      }
      */
     app.get('/api/v1/lakes/allmessages', function(req, res) {
-        crud.retrieveLakesMessages({},function(err,messages){
+        crud.retrieveLakesMessages({}, function(err, messages) {
             res.statusCode = 200;
             var out = {};
             out._links = {};
@@ -184,7 +184,7 @@
 
             res.json(out);
 
-        });      
+        });
     });
 
     /**
@@ -410,7 +410,7 @@
         });
     });
 
-     /**
+    /**
      * @api {get} /lake/:id/weather Get lake weather
      * @apiName GetLakeWeather
      * @apiGroup Lakes
@@ -451,13 +451,13 @@
      *               "openWeatherCityId": 2812482
      *           }
      *      }
-     *      
+     *
      *
      * @apiUse LakeNotFoundError
      */
     app.get('/api/v1/lakes/:id/weather', function(req, res, next) {
         crud.retrieveLake({
-            '_id': req.params.id,
+            '_id': req.params.id
         }, function(err, doc) {
             if (err) {
                 if (err.name === "CastError" && err.type === "ObjectId") {
@@ -489,7 +489,7 @@
         });
     });
 
-     /**
+    /**
      * @api {get} /lake/:id/messages Get lake messages
      * @apiName GetLakeMessages
      * @apiGroup Lakes
@@ -509,13 +509,13 @@
      *               }
      *           ]
      *      }
-     *      
+     *
      *
      * @apiUse LakeNotFoundError
      */
     app.get('/api/v1/lakes/:id/messages', function(req, res, next) {
         crud.retrieveLake({
-            '_id': req.params.id,
+            '_id': req.params.id
         }, function(err, doc) {
             if (err) {
                 if (err.name === "CastError" && err.type === "ObjectId") {

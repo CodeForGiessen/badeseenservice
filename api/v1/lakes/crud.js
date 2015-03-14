@@ -14,46 +14,50 @@
         return Lake.ObjectId.isValid(id);
     }
 
-    function retrieveLakesBaseData(query, callback){
+    function retrieveLakesBaseData(query, callback) {
         Lake.find(query, {
             measurements: 0,
             messages: 0
         }, callback);
     }
 
-    function retrieveLakesWeatherData(query, callback){
+    function retrieveLakesWeatherData(query, callback) {
         Lake.find(query, {
             weather: 1,
-            _id:1
-        }, function(err,doc){
+            _id: 1
+        }, function(err, doc) {
             var weathers = {};
-            if(!err){
+
+            if (!err) {
                 doc.forEach(function(elt, index) {
                     weathers[elt._id] = elt.weather;
                 });
             }
-            callback(err,weathers);
+
+            callback(err, weathers);
         });
     }
 
-    function retrieveLakesMessages(query, callback){
+    function retrieveLakesMessages(query, callback) {
         Lake.find(query, {
             messages: 1,
-            _id:1
-        }, function(err,doc){
+            _id: 1
+        }, function(err, doc) {
             var messages = {};
-            if(!err){
+
+            if (!err) {
                 doc.forEach(function(elt, index) {
                     messages[elt._id] = elt.messages;
                 });
             }
-            callback(err,messages);
+
+            callback(err, messages);
         });
     }
 
     function getAllObjectIDs(callback) {
         Lake.find({}, {
-            '_id': 1,            
+            '_id': 1,
         }, function(err, doc) {
             var ids = [];
 
@@ -132,7 +136,6 @@
     module.exports.retrieveLakesWeatherData = retrieveLakesWeatherData;
     module.exports.retrieveLakesMessages = retrieveLakesMessages;
 
-    
     module.exports.updateLake = updateLake;
     module.exports.deleteLake = deleteLake;
     module.exports.isObjectId = isObjectId;

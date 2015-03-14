@@ -19,8 +19,8 @@
         next();
     });
     app.use(api);
-    
-     /* serve documentation as static content */     
+
+    /* serve documentation as static content */
     app.use('/doc', express.static('./doc'));
     app.use(dashboard);
 
