@@ -21,7 +21,7 @@
     app.use(api);
 
     /* serve documentation as static content */
-    app.use('/doc', express.static('./doc'));
+    app.use('/doc', express.static(__dirname + '/doc'));
     app.use(dashboard);
 
 
