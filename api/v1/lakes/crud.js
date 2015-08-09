@@ -17,7 +17,8 @@
     function retrieveLakesBaseData(query, callback) {
         Lake.find(query, {
             measurements: 0,
-            messages: 0
+            messages: 0,
+            weather: 0
         }, callback);
     }
 
