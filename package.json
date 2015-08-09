@@ -29,7 +29,11 @@
     "mongodb": "^1.4.31",
     "mongoose": "^3.8.23",
     "multer": "^0.1.8",
-    "usage": "^0.6.0"
+    "q": "^1.2.0",
+    "request": "^2.53.0",
+    "usage": "^0.6.0",
+    "xml2json": "^0.7.1",
+    "request": "^2.53.0"
   },
   "devDependencies": {
     "chai": "^2.0.0",

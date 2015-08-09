@@ -90,6 +90,7 @@
     var lakeSchema = new Schema({
         name: String,
         hlugurl: String,
+        hlugid:String,
         bathingPermission: String,
         latitude: Number,
         longitude: Number,
