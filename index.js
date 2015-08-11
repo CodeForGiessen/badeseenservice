@@ -11,6 +11,7 @@
 
     /* set up middleware */
     var api = require('./api'),
+        trigger = require('./trigger'),
         dashboard = require('./dashboard');
 
     app.use(function(req, res, next) {
@@ -19,6 +20,7 @@
         next();
     });
     app.use(api);
+    app.use(trigger);
 
     /* serve documentation as static content */
     app.use('/doc', express.static(__dirname + '/doc'));
