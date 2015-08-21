@@ -315,7 +315,7 @@
             '_id': req.params.id
         }, function(err, doc) {
             if (err) {
-                if (err.name === "CastError" && err.type === "ObjectId") {
+                if (err.name === "CastError" && err.kind === "ObjectId") {
                     res.statusCode = 422;
                     res.json({
                         "error": "NoValidID"
@@ -381,7 +381,7 @@
             '_id': req.params.id
         }, function(err, doc) {
             if (err) {
-                if (err.name === "CastError" && err.type === "ObjectId") {
+                if (err.name === "CastError" && err.kind === "ObjectId") {
                     res.statusCode = 422;
                     res.json({
                         "error": "NoValidID"
@@ -460,7 +460,7 @@
             '_id': req.params.id
         }, function(err, doc) {
             if (err) {
-                if (err.name === "CastError" && err.type === "ObjectId") {
+                if (err.name === "CastError" && err.kind === "ObjectId") {
                     res.statusCode = 422;
                     res.json({
                         "error": "NoValidID"
@@ -518,7 +518,7 @@
             '_id': req.params.id
         }, function(err, doc) {
             if (err) {
-                if (err.name === "CastError" && err.type === "ObjectId") {
+                if (err.name === "CastError" && err.kind === "ObjectId") {
                     res.statusCode = 422;
                     res.json({
                         "error": "NoValidID"
