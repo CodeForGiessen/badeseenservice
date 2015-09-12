@@ -14,10 +14,12 @@
                 err: null,
                 time:0,
                 lakesupdated:0,
+                lakesupdatefailed:0
             };
             updateWeatherDataQ()
             .then(function(data){
                 result.lakesupdated = data.updated;
+                result.lakesupdatefailed = data.failed;
                 result.time = new Date().getTime() - startMs;
                 res.json(result);
             })
